@@ -31,9 +31,10 @@ class App extends React.Component {
                id:snapShot.id,
                ...snapShot.data() //spread all other data
              }
-           }
-           )
-        })
+           });
+
+        });
+
       }
       else
       {
