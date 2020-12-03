@@ -16,6 +16,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount()  {
+
+
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -25,10 +27,13 @@ class App extends React.Component {
       if(userAuth) {
                     const userRef = await createUserProfileDocument(userAuth);
                     userRef.onSnapshot(snapShot=>{
+                                      // now we can use the action code instead of set state
                                       setCurrentUser( {  id: snapShot.id, ...snapShot.data() });
                                       });
 
                     }
+
+          // action code instead of set state
         setCurrentUser( userAuth );
    
      });
@@ -53,6 +58,7 @@ class App extends React.Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
+  // when this method is called , we get the user object from user.action
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
